@@ -1,0 +1,181 @@
+package alarmpack;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import javax.sound.midi.*;
+import javax.swing.*;
+
+public class Alarm implements Runnable {
+
+	private static final long serialVersionUID = -6177985411427220010L;
+
+	private static final int ALARM_TIMEOUT_HOUR = 00;
+
+	private static final int ALARM_TIMEOUT_MINUTE = 17;
+
+	private static final int SNOOZE_TIME = 1;
+
+	private static final long TIMEOUT = 5000;
+
+	private static final long SOUND_TIMEOUT = 500;
+
+	private static final long COLOR_CHANGE_CONSTANT = 1000;
+
+	private static final int COMMAND_CONSTANT = 144;
+
+	private static int newTimeOut = 0;
+
+	private static final Color[] COLORS = { Color.BLACK, Color.BLUE,
+			Color.CYAN, Color.DARK_GRAY, Color.GRAY, Color.GREEN,
+			Color.LIGHT_GRAY, Color.MAGENTA, Color.ORANGE, Color.PINK,
+			Color.RED, Color.WHITE, Color.YELLOW };
+
+	private boolean timeOut = false;
+
+	private boolean stopAlarm = false;
+
+	private static boolean requestedSnooze = false;
+
+	public Alarm() {
+		Thread alarmRaiser = new Thread(this);
+		alarmRaiser.start();
+	}
+
+	public void run() {
+		while (!timeOut) {
+			checkTimeOut();
+		}
+	}
+
+	private void checkTimeOut() {
+		try {
+			Thread.sleep(TIMEOUT);
+			Calendar currentTime = Calendar.getInstance();
+			if ((currentTime.get(Calendar.HOUR_OF_DAY) == ALARM_TIMEOUT_HOUR)
+					&& (currentTime.get(Calendar.MINUTE) == ALARM_TIMEOUT_MINUTE)) {
+				raiseSound();
+				constructGUI();
+				timeOut = true;
+			}
+		} catch (InterruptedException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	private void checkTimeOut(int snoozeTime) {
+		try {
+			System.out.println("Inside snoozer");
+			Thread.sleep(TIMEOUT);
+			Calendar currentTime = Calendar.getInstance();
+			System.out.println("New TImeout: " + newTimeOut);
+			if ((currentTime.get(Calendar.HOUR_OF_DAY) == ALARM_TIMEOUT_HOUR)
+					&& (currentTime.get(Calendar.MINUTE) == newTimeOut)) {
+				System.out.println("New timeout reached!!!!");
+				raiseSound();
+				constructGUI();
+				timeOut = true;
+			}
+		} catch (InterruptedException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	private void constructGUI() {
+		System.out.println("Snoozer invoked consturct GUI");
+		try {
+			JFrame frame = null;
+			JPanel centerPanel = null;
+			if (!requestedSnooze) {
+				frame = new JFrame();
+				frame.setResizable(false);
+				frame.setTitle("Listen to Sahasranamam");
+				frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+				frame.setAlwaysOnTop(true);
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setLayout(new BorderLayout());
+				JPanel panel = new JPanel();
+				JLabel label = new JLabel("Listen to Vishnu Sahasranamam");
+				panel.add(label);
+				frame.add(panel, BorderLayout.NORTH);
+				centerPanel = new JPanel();
+				frame.add(centerPanel, BorderLayout.CENTER);
+				panel = new JPanel();
+				panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+				JButton snoozeButton = new JButton("Snooze");
+				JButton stopButton = new JButton("Stop");
+				panel.add(snoozeButton);
+				panel.add(stopButton);
+				frame.add(panel, BorderLayout.SOUTH);
+				frame.setVisible(true);
+				stopButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						stopAlarm = true;
+					}
+				});
+				snoozeButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						stopAlarm = true;
+						requestedSnooze = true;
+						timeOut = false;
+						newTimeOut = (ALARM_TIMEOUT_MINUTE + SNOOZE_TIME);
+						while (!timeOut) {
+							if (newTimeOut < 60) {
+								checkTimeOut(newTimeOut);
+							} else {
+								timeOut = true;
+								stopAlarm = true;
+							}
+						}
+					}
+				});
+			}
+			while (!stopAlarm) {
+				int number = (int) (Math.random() * COLORS.length);
+				Thread.sleep(COLOR_CHANGE_CONSTANT);
+				centerPanel.setBackground(COLORS[number]);
+			}
+		} catch (InterruptedException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	private void raiseSound() {
+		new Thread(new Runnable() {
+			public void run() {
+				try {
+					Sequencer sequencer = MidiSystem.getSequencer();
+					sequencer.open();
+					Sequence sequence = new Sequence(Sequence.PPQ, 4);
+					Track track = sequence.createTrack();
+					ShortMessage shortMessage = null;
+					MidiEvent midiEvent = null;
+					while (!stopAlarm) {
+						Thread.sleep(SOUND_TIMEOUT);
+						int channel = (int) (Math.random() * 15);
+						int dataOne = Math.round((int) (Math.random() * 128));
+						int dataTwo = Math.round((int) (Math.random() * 128));
+						shortMessage = new ShortMessage();
+						midiEvent = new MidiEvent(shortMessage, 5);
+						track.add(midiEvent);
+						sequencer.setSequence(sequence);
+						shortMessage.setMessage(COMMAND_CONSTANT, channel,
+								dataOne, dataTwo);
+						sequencer.start();
+					}
+				} catch (MidiUnavailableException ex) {
+					ex.printStackTrace();
+				} catch (InvalidMidiDataException ex) {
+					ex.printStackTrace();
+				} catch (InterruptedException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}).start();
+	}
+
+	public static void main(String[] args) {
+		new Alarm();
+	}
+
+}

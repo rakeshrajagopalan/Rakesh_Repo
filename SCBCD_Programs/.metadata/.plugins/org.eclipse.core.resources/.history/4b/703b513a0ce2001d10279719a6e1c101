@@ -1,0 +1,16 @@
+package alarmpack;
+
+public class Vishnu_Sahasranamam_Alarm implements Runnable {
+	
+	public Vishnu_Sahasranamam_Alarm() {
+		
+	}
+	
+	public static void main(String[] args) {
+		
+	}
+
+	public void run() {
+		
+	}
+}

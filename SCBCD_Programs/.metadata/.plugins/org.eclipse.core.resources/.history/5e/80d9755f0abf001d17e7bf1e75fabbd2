@@ -1,0 +1,31 @@
+package shopapp.client.ui;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
+import shopapp.utils.*;
+
+public class Home extends JFrame {
+
+	private static final long serialVersionUID = -1994551397999731062L;
+
+	public Home() throws Exception {
+		constructGUI();
+	}
+
+	private void constructGUI() throws Exception {
+		setTitle("Home Page");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(ApplicationConstants.SCREEN_SIZE);
+	}
+
+	public static void main(String[] args) {
+		try {
+			new Home().setVisible(true);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+}

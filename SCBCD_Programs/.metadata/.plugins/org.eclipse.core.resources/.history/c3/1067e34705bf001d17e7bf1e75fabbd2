@@ -1,0 +1,5 @@
+package shopapp.client.ui;
+
+public class Login {
+
+}

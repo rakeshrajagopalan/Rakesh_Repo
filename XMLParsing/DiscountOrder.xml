@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><Order>
+  <Manifest>
+    <Item>
+      <ID>101</ID>
+      <NAME>All about DOM.</NAME>
+      <PRICE>$35.10</PRICE>
+   </Item>
+    <Item>
+      <ID>102</ID>
+      <NAME>The story about ...</NAME>
+      <PRICE>$26.10</PRICE>
+    </Item>
+    <Item>
+      <ID>103</ID>
+      <NAME>Wnen to use a DOM.</NAME>
+      <PRICE>$44.10</PRICE>
+    </Item>
+    <Item>
+      <ID>104</ID>
+      <NAME>Rakesh</NAME>
+      <PRICE>$53.10</PRICE>
+    </Item>
+  <TAX>$13.07</TAX><TOTAL>$158.40</TOTAL></Manifest>
+</Order>

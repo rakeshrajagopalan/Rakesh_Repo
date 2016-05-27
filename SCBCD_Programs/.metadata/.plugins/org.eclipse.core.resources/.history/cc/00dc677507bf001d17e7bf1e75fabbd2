@@ -1,0 +1,28 @@
+package shopapp.client.ui;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
+
+public class Home extends JFrame {
+
+	private static final long serialVersionUID = -1994551397999731062L;
+
+	public Home() throws Exception {
+		constructGUI();
+	}
+
+	private void constructGUI() throws Exception {
+		
+	}
+
+	public static void main(String[] args) {
+		try {
+			new Home().setVisible(true);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+}

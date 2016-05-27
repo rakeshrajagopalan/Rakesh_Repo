@@ -1,0 +1,18 @@
+package alarmpack;
+
+public class Vishnu_Sahasranamam_Alarm implements Runnable {
+
+	public Vishnu_Sahasranamam_Alarm() {
+		Thread alarmRaiser = new Thread(this);
+		alarmRaiser.start();
+	}
+
+	public void run() {
+		
+	}
+
+	public static void main(String[] args) {
+		new Vishnu_Sahasranamam_Alarm();
+	}
+
+}

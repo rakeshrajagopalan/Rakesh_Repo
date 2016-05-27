@@ -1,0 +1,4 @@
+what,kind,bundleId,bundleVersion,description,time
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.file.save,1228845755406
+started,bundle,org.eclipse.epp.usagedata.ui,1.0.1.R200809220400,org.eclipse.epp.usagedata.ui,1228845755656
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1228845756890

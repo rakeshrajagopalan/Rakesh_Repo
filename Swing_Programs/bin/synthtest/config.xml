@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<synth>
+	<style id="button">
+		<font name="Verdana" size="24" style="BOLD" />
+		<state value="MOUSE_OVER">
+			<font name="Serif" size="48" style="ITALIC" />
+			<imagePainter method="buttonBackground" path="Button.jpg" sourceInsets="10 10 10 10"/>
+		</state>
+		<state value="PRESSED">
+			<imageIcon id="defaultIcon" path="Junior.gif" />
+			<property key="Button.icon" value="defaultIcon" />
+		</state>
+	</style>
+	<bind style="button" type="region" key="Button" />
+</synth>

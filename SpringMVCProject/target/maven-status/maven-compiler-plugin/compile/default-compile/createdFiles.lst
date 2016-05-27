@@ -1,0 +1,7 @@
+com\springmvc\config\SpringMongoConfig.class
+com\springmvc\service\StudentServiceImpl.class
+com\springmvc\data\Student.class
+com\springmvc\core\StudentController.class
+com\springmvc\dao\StudentDAOImpl.class
+com\springmvc\service\StudentService.class
+com\springmvc\dao\StudentDAO.class

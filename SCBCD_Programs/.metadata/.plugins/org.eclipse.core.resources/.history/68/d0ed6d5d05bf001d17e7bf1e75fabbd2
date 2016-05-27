@@ -1,0 +1,14 @@
+package shopapp.client.ui;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
+
+public class Login extends JFrame {
+
+	private static final long serialVersionUID = 40616242353799967L;
+	
+	
+
+}

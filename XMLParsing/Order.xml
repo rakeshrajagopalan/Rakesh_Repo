@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<Order>
+  <Manifest>
+    <Item>
+      <ID>101</ID>
+      <NAME>All about DOM.</NAME>
+      <PRICE>$39</PRICE>
+   </Item>
+    <Item>
+      <ID>102</ID>
+      <NAME>The story about ...</NAME>
+      <PRICE>$29</PRICE>
+    </Item>
+    <Item>
+      <ID>103</ID>
+      <NAME>Wnen to use a DOM.</NAME>
+      <PRICE>$49</PRICE>
+    </Item>
+    <Item>
+      <ID>104</ID>
+      <NAME>Rakesh</NAME>
+      <PRICE>$59</PRICE>
+    </Item>
+  </Manifest>
+</Order>
+

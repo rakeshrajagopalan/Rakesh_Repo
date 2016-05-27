@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;RockShopStopApp/SQL_Comments.sql&apos; to &apos;SQL_Commands.sql&apos;" description="Rename resource &apos;SQL_Comments.sql&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="SQL_Comments.sql" name="SQL_Commands.sql" stamp="1228041749562" updateReferences="true"/>
+</session>

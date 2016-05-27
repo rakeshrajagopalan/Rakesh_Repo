@@ -1,0 +1,15 @@
+package test;
+
+import java.io.IOException;
+
+public class Test {
+	public static void main(String[] args) {
+		try {
+			String[] commands = { "", "" };
+			Runtime runtime = Runtime.getRuntime();
+			runtime.exec(commands);
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+}

@@ -1,0 +1,8 @@
+package alarmpack;
+
+public class Vishnu_Sahasranamam_Alarm {
+	
+	public static void main(String[] args) {
+		
+	}
+}

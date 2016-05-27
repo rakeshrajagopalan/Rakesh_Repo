@@ -1,0 +1,15 @@
+package test;
+
+import java.io.IOException;
+
+public class Test {
+	public static void main(String[] args) {
+		try {
+			String[] commands = { "C:\\Program Files\\Windows Media Player\\wmplayer.exe", "F:\\Devotional Songs\\NARAYANA ENUM.mp3" };
+			Runtime runtime = Runtime.getRuntime();
+			runtime.exec(commands);
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+}

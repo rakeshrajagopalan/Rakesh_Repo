@@ -1,0 +1,22 @@
+package test;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+public class Test extends JFrame {
+
+	private static final long serialVersionUID = -5666734745185765139L;
+	
+	public Test() {
+		setTitle("TEst");
+		setSize(200,200);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		add(new JLabel("Jai Sri Ram"));
+		setVisible(true);
+	}
+	
+	public static void main(String[] args) {
+		new Test();
+	}
+
+}
