@@ -1,0 +1,82 @@
+package puyopack;
+
+import javax.swing.*;
+import javax.swing.table.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+
+/**
+ * Class that populates high scores in a tabluar form.
+ * 
+ * @author Rakesh(19-07-07)
+ * 
+ */
+
+@SuppressWarnings("unchecked")
+public class ScoreViewer extends JFrame {
+
+	private static final long serialVersionUID = -3399938112071548844L;
+
+	private Vector columnNames;
+
+	private Vector rowData;
+
+	private JTable scoreTable;
+
+	private JButton backButton = new JButton("Back");
+
+	private JButton resetScores = new JButton("Reset Scores");
+
+	private DBHandler dbHandler = new DBHandler();
+
+	/**
+	 * Constructor
+	 * 
+	 */
+	public ScoreViewer() {
+		setTitle("High Scores");
+		setUndecorated(true);
+		setSize(300, 300);
+		showGUI();
+	}
+
+	/**
+	 * Method that populates top-ten scores in a table.
+	 * 
+	 */
+	private void showGUI() {
+		this.getContentPane().setLayout(new BorderLayout());
+		rowData = dbHandler.showRecords();
+		columnNames = new Vector();
+		columnNames.add("Name");
+		columnNames.add("Score");
+		scoreTable = new JTable(rowData, columnNames);
+		scoreTable.setShowGrid(true);
+		JTableHeader header = new JTableHeader();
+		TableColumnModel model = scoreTable.getColumnModel();
+		header.setColumnModel(model);
+		JPanel tablePanel = new JPanel();
+		tablePanel.setLayout(new BoxLayout(tablePanel, BoxLayout.Y_AXIS));
+		tablePanel.add(header);
+		tablePanel.add(scoreTable);
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.add(backButton);
+		buttonPanel.add(resetScores);
+		this.getContentPane().add(tablePanel, BorderLayout.CENTER);
+		this.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new WelcomeScreen().setVisible(true);
+				ScoreViewer.this.dispose();
+			}
+		});
+		resetScores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ScoreViewer.this.dbHandler.resetScores();
+				new WelcomeScreen().setVisible(true);
+				ScoreViewer.this.dispose();
+			}
+		});
+	}
+}
